@@ -5,8 +5,12 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { dbConnection } from './mongo.js'
+<<<<<<< HEAD
 import Admin from '../src/admin/admin.model.js'
 
+=======
+import clienteRoutes from '../src/cliente/cliente.routes.js'
+>>>>>>> feature/cliente
 
 
 class Server{
@@ -14,6 +18,8 @@ class Server{
     constructor(){
         this.app = express();
         this.port = process.env.PORT;
+
+        this.clientePath = '/bank/v1/cliente'
 
         this.conectarDB();
         this.middlewares();
@@ -33,6 +39,8 @@ class Server{
     }
 
     routes(){
+
+        this.app.use(this.clientePath, clienteRoutes);
 
     }
 
