@@ -13,25 +13,5 @@ const AdminSchema = mongoose.Schema({
     }
 })
 
-const Admin = mongoose.model('Admin', AdminSchema)
 
-Admin.findOne({}, async (err, admin) => {
-    if (!admin) {
-        try {
-            const defaultAdmin = new Admin({
-                username: 'ADMINB',
-                password: 'ADMINB' 
-            });
-
-            await defaultAdmin.save();
-
-            console.log('Administrador predeterminado creado');
-
-        } catch (error) {
-            
-            console.error('Error al crear el administrador predeterminado: ', error);
-        }
-    }
-});
-
-export default Admin;
+export default mongoose.model('Admin', AdminSchema)
