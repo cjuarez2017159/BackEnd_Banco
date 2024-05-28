@@ -5,12 +5,8 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { dbConnection } from './mongo.js'
-<<<<<<< HEAD
 import Admin from '../src/admin/admin.model.js'
-
-=======
 import clienteRoutes from '../src/cliente/cliente.routes.js'
->>>>>>> feature/cliente
 
 
 class Server{
