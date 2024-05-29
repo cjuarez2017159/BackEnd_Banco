@@ -1,8 +1,9 @@
 import Cliente from "../cliente/cliente.model.js";
+import Admin from "../admin/admin.model.js";
 import bcryptjs from "bcryptjs";
 import { generarJWT } from "../helpers/generate-JWT.js";
 
-export const login = async (req, res) => {
+export const loginCliente = async (req, res) => {
     const {email, password} = req.body;
 
     try{
@@ -31,6 +32,40 @@ export const login = async (req, res) => {
             return res.status(400).send("wrong password");
         }
     }catch (e) {
-        res.status(500).send("Comuniquese con el administrador");
+        res.status(500).send("Contact administrator");
+    }
+};
+
+export const loginAdmin = async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        const admin = await Admin.findOne({ username: username.toLowerCase() });
+
+        if(admin && (await bcryptjs.compare(password, admin.password))){
+        const token = await generarJWT(admin.id, admin.username);
+
+        res.status(200).json({
+            msg: "Login Admin OK!!!",
+            userDetails: {
+                username: admin.username,
+                token: token
+            },
+        });
+    }
+
+        if (!admin) {
+            return res
+            .status(400)
+            .send(`Wrong credentials, ${username} doesn't exists en database`);
+        }
+
+        const validPassword = await bcryptjs.compare(password, admin.password);
+        if (!validPassword) {
+            return res.status(400).send("wrong password");
+        }
+
+    } catch (e) {
+        res.status(500).send("Contact administrator");
     }
 };
