@@ -5,7 +5,7 @@ const AccountSchema = mongose.Schema({
         type: decimal,
         required: true
     },
-    accountNumber: {
+    account_number: {
         type: integer,
         required: true
     },

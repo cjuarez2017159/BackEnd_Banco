@@ -28,7 +28,13 @@ export const clientePost = async (req, res) => {
 
     const { nameClient, DPI, address, cellphone, email, password, job, monthlyIncome} = req.body;
     const cliente = new Cliente ( { nameClient, DPI, address, cellphone, email, password, job, monthlyIncome} );
-
+   
+    if (req.user.username !== 'ADMINB') {
+        return res.status(403).json({
+            error: 'No autorizado para crear un cliente'
+        });
+    }
+    
     const salt = bcryptjs.genSaltSync(10);
     cliente.password = bcryptjs.hashSync(password, salt);
 
