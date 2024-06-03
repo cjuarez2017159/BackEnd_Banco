@@ -55,10 +55,10 @@ const ClienteSchema = mongoose.Schema({
 
 });
 
-ClienteSchema.methods.toJSON = function(){
+/*ClienteSchema.methods.toJSON = function(){
     const {__v, _id, ...clientes} = this.ObjectId()
     clientes.uid = _id;
     return clientes
-}
+}*/
 
 export default mongoose.model('Cliente', ClienteSchema);
