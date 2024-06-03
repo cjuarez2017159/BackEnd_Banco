@@ -8,6 +8,10 @@ const ProductSchema = mongose.Schema({
     description: {
         type: String,
         required: true
+    },
+    estado: {
+        type: String,
+        required:true
     }
 });
 
