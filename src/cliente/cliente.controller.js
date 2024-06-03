@@ -28,7 +28,7 @@ export const clientePost = async (req, res) => {
 
     const { nameClient, DPI, address, cellphone, email, password, job, monthlyIncome} = req.body;
     const cliente = new Cliente ( { nameClient, DPI, address, cellphone, email, password, job, monthlyIncome} );
-
+    
     const salt = bcryptjs.genSaltSync(10);
     cliente.password = bcryptjs.hashSync(password, salt);
 
