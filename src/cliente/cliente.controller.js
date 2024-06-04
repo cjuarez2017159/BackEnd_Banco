@@ -3,6 +3,7 @@ import bcryptjs from 'bcryptjs';
 import Cliente from "./cliente.model.js";
 import Admin from "../admin/admin.model.js"
 import jwt from "jsonwebtoken"
+
 export const clienteGet = async (req, res) => {
 
     const {limite, desde} = req.query;
