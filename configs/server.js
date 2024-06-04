@@ -45,7 +45,6 @@ class Server{
         this.app.use(this.authPath, authRoutes);
         this.app.use(this.productPath, productRoutes);
 
-
     }
 
     async createDefaultAdmin() {
