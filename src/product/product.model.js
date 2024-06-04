@@ -11,7 +11,7 @@ const ProductSchema = mongoose.Schema({
     },
     estado: {
         type: String,
-        required:true
+        default: true
     }
 });
 
