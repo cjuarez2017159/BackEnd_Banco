@@ -5,6 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { dbConnection } from './mongo.js'
+import productRoutes from '../src/product/product.routes.js'
 
 
 
@@ -13,6 +14,8 @@ class Server{
     constructor(){
         this.app = express();
         this.port = process.env.PORT;
+
+        this.productPath = '/bank/v1/product';
 
         this.conectarDB();
         this.middlewares();
@@ -31,6 +34,8 @@ class Server{
     }
 
     routes(){
+
+        this.app.use(this.productPath, productRoutes);
 
     }
 
