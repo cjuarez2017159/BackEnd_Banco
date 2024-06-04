@@ -8,6 +8,7 @@ import { dbConnection } from './mongo.js'
 import Admin from '../src/admin/admin.model.js'
 import clienteRoutes from '../src/cliente/cliente.routes.js'
 import authRoutes from '../src/auth/auth.routes.js';
+import productRoutes from '../src/product/product.routes.js';
 
 
 class Server{
@@ -18,6 +19,7 @@ class Server{
 
         this.clientePath = '/bank/v1/cliente'
         this.authPath = '/bank/v1/auth';
+        this.productPath = '/bank/v1/product';
 
 
         this.conectarDB();
@@ -41,6 +43,7 @@ class Server{
 
         this.app.use(this.clientePath, clienteRoutes);
         this.app.use(this.authPath, authRoutes);
+        this.app.use(this.productPath, productRoutes);
 
 
     }
