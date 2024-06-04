@@ -2,15 +2,15 @@ import mongoose from "mongoose"
 
 const AccountSchema = mongoose.Schema({
     amountAccount: {
-        type: Number,
+        type: String,
         required: true
     },
     accountNumber: {
-        type: Number,
+        type: String,
         required: true
     },
     DPI: {
-        type: Number,
+        type: String,
         required: true
     },
     nameClient: {
