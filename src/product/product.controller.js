@@ -37,3 +37,49 @@ export const productPost = async (req, res) => {
     return res.status(201).json({ message: "Producto creado ", product: newProduct})
 }
 
+export const productGetById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const product = await Product.findById(id);
+
+        if (!product) {
+            return res.status(404).json({
+                msg: 'Producto no encontrado'
+            });
+        }
+        
+        return res.status(200).json({
+            product
+        });
+    } catch (error) {
+        return res.status(500).json({
+            error: error.message
+        });
+    }
+}
+
+
+export const productsPut = async (req, res = response) => {
+    const { id } = req.params;
+    const { products, description, ...resto } = req.body;
+
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(id, resto, { new: true });
+
+        if (!updatedProduct) {
+            return res.status(404).json({
+                msg: 'Producto no encontrado'
+            });
+        }
+
+        return res.status(200).json({
+            msg: 'Producto actualizado',
+            product: updatedProduct
+        });
+    } catch (error) {
+        return res.status(500).json({
+            error: error.message
+        });
+    }
+}
