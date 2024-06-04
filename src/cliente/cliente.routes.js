@@ -34,12 +34,14 @@ router.post(
 )
 
 router.put(
-    "/",
+    "/:id",
         [
+
             validarJWT,
+            check("id", "no es un id valido").isMongoId(),
+            check("id").custom(getClienteById)
 
-
-        ]
+        ],clientesPut
 
 )
 
