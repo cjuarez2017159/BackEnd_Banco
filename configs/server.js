@@ -13,6 +13,7 @@ import serviceRoutes from '../src/service/service.routes.js';
 import productRoutes from '../src/product/product.routes.js';
 import accountRoutes from '../src/account/account.routes.js';
 import historyRoutes from  '../src/history/history.routes.js';
+import favoriteRoutes from '../src/favorite/favorite.routes.js';
 
 class Server{
 
@@ -26,6 +27,7 @@ class Server{
         this.productPath = '/bank/v1/product';
         this.accountPath = '/bank/v1/account'
         this.historyPath = '/bank/v1/history'
+        this.favoritePath = '/bank/v1/favorite'
 
         this.conectarDB();
         this.middlewares();
@@ -51,7 +53,8 @@ class Server{
         this.app.use(this.servicePath, serviceRoutes);
         this.app.use(this.productPath, productRoutes);
         this.app.use(this.accountPath, accountRoutes);
-        this.app.use(this.historyPath, historyRoutes)
+        this.app.use(this.historyPath, historyRoutes);
+        this.app.use(this.favoritePath,favoriteRoutes);
 
     }
 
