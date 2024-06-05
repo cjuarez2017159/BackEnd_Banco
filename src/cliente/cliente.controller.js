@@ -1,6 +1,8 @@
-import { response, request } from "express";
+import { response, request, json } from "express";
 import bcryptjs from 'bcryptjs';
 import Cliente from "./cliente.model.js";
+import Admin from "../admin/admin.model.js"
+import jwt from "jsonwebtoken"
 
 export const clienteGet = async (req, res) => {
 
@@ -28,6 +30,7 @@ export const clientePost = async (req, res) => {
 
     const { nameClient, DPI, address, cellphone, email, password, job, monthlyIncome} = req.body;
     const cliente = new Cliente ( { nameClient, DPI, address, cellphone, email, password, job, monthlyIncome} );
+<<<<<<< HEAD
    
     if (req.user.username !== 'ADMINB') {
         return res.status(403).json({
@@ -35,8 +38,30 @@ export const clientePost = async (req, res) => {
         });
     }
     
+=======
+    const token = req.header('x-token');
+
+    const decoded = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
+    const clienteId = decoded.uid;
+
+    const admin = await Admin.findById(clienteId);
+
+    if(!admin) {
+        return res.status(401).json({
+            msg: 'TU no eres administrador'
+        });
+    }
+
+    if(!admin.estado) {
+        return res.status(401).json({
+            msg:'token no valido - administrador en estado false'
+        })
+    }
+ 
+>>>>>>> 58d870c071a8c6ee9c9bb09dc4d6dcaa0bd17536
     const salt = bcryptjs.genSaltSync(10);
     cliente.password = bcryptjs.hashSync(password, salt);
+
 
     await cliente.save();
 

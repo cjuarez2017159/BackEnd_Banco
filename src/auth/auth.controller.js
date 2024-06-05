@@ -4,10 +4,10 @@ import bcryptjs from "bcryptjs";
 import { generarJWT } from "../helpers/generate-JWT.js";
 
 export const login = async (req, res) => {
-    const { account_number, password, username } = req.body;
+    const { account_number, password} = req.body;
 
     try {
-        const cliente = await Cliente.findOne({ account_number: account_number.toLowerCase() });
+        const cliente = await Cliente.findOne({ account_number: account_number});
 
         if (cliente) {
             const validPassword = await bcryptjs.compare(password, cliente.password);
@@ -26,7 +26,7 @@ export const login = async (req, res) => {
             }
         }
 
-        const admin = await Admin.findOne({ username: username.toLowerCase() });
+        const admin = await Admin.findOne({ username: account_number});
 
         if (admin) {
             const validPassword = await bcryptjs.compare(password, admin.password);
@@ -45,7 +45,7 @@ export const login = async (req, res) => {
             }
         }
 
-        return res.status(400).send(`Credenciales incorrectas, ${account_number, username} no existe en la base de datos`);
+        return res.status(400).send(`Credenciales incorrectas, ${account_number} no existe en la base de datos`);
 
     } catch (e) {
         console.log(e);
