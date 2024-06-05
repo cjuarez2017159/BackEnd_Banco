@@ -1,7 +1,13 @@
 import mongoose from "mongoose";
-import account from "../account/account.model";
+import account from "../account/account.model.js";
 
 const HistorySchema = mongoose.Schema({
+
+    estado: {
+        type: String,
+        default: true,
+    },
+
 
     account: {
         type: [{
@@ -26,6 +32,7 @@ const HistorySchema = mongoose.Schema({
         _id: false,
     }
 
+    
 })
 
 export default mongoose.model('History', HistorySchema);
