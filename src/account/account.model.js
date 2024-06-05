@@ -1,24 +1,26 @@
-import mongose from "mongoose"
+import mongoose from "mongoose"
 
-const AccountSchema = mongose.Schema({
+const AccountSchema = mongoose.Schema({
     amountAccount: {
-        type: decimal,
+        type: String,
         required: true
     },
-    accountNumber: {
-        type: integer,
+    account_number: {
+        type: String,
         required: true
     },
     DPI: {
-        type: integer,
+        type: String,
         required: true
     },
     nameClient: {
-        type: string,
+        type: String,
         required: [true, "The nameClient is required"]
+    },
+    estado: {
+        type: Boolean,
+        default: true
     }
 });
 
-const account = model("Account", AccountSchema);
-
-export default account;
+export default mongoose.model("Account", AccountSchema);

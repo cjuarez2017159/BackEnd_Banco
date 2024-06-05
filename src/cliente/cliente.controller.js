@@ -3,6 +3,7 @@ import bcryptjs from 'bcryptjs';
 import Cliente from "./cliente.model.js";
 import Admin from "../admin/admin.model.js"
 import jwt from "jsonwebtoken"
+
 export const clienteGet = async (req, res) => {
 
     const {limite, desde} = req.query;
@@ -75,14 +76,9 @@ export const getClienteById = async (req,res) => {
 export const clientesPut = async (req, res = response) => {
 
     const { id } = req.params;
-    const {_id, nameClient, address, cellphone, email, job, monthlyIncome, ...resto} = req.body
+    const {_id, password,account_number,DPI,estado, ...resto} = req.body
 
-    if(password) {
-        const salt = bcryptjs.genSaltSync();
-        resto.password = bcryptjs.hashSync(password, salt);
-    }
-
-    await Cliente.findByAndUpdate(id, resto);
+    await Cliente.findByIdAndUpdate(id, resto);
 
     const cliente = await Cliente.findOne({_id: id});
 
