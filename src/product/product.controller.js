@@ -97,7 +97,7 @@ export const productDelete = async (req, res) => {
         }
 
         return res.status(200).json({
-            msg: 'Producto eliminado',
+            msg: 'Producto Eliminado',
             product: deletedProduct
         });
     } catch (error) {
