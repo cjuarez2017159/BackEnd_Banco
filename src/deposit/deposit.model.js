@@ -16,6 +16,11 @@ const DepositSchema = mongoose.Schema({
         type: String,
         required: [true, "el DPI es obligatorio"]
     },  
+
+    estado: {
+        type: Boolean,
+        default: true
+    }
 });
 
 export default mongoose.model('Deposit', DepositSchema);

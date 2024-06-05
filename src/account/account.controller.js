@@ -28,7 +28,7 @@ export const accountGet = async (req, res) => {
 }
 
 export const getByAccountNumber = async(req, res ) => {
-    const { accountNumber } = req.query;
+    const { accountNumber } = req.body;
     const token = req.header('x-token');
 
     const decoded = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
@@ -37,7 +37,7 @@ export const getByAccountNumber = async(req, res ) => {
     const admin = await Admin.findById(userId);
 
     if (admin) {
-        const cuentas = await Account.find({ accountNumber }).limit(parseInt(limite)).skip(parseInt(desde));
+        const cuentas = await Account.find({ accountNumber });
         return res.json(cuentas);
     } else {
         const cliente = await Cliente.findById(userId);
