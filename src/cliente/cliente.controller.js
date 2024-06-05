@@ -30,15 +30,6 @@ export const clientePost = async (req, res) => {
 
     const { nameClient, DPI, address, cellphone, email, password, job, monthlyIncome} = req.body;
     const cliente = new Cliente ( { nameClient, DPI, address, cellphone, email, password, job, monthlyIncome} );
-<<<<<<< HEAD
-   
-    if (req.user.username !== 'ADMINB') {
-        return res.status(403).json({
-            error: 'No autorizado para crear un cliente'
-        });
-    }
-    
-=======
     const token = req.header('x-token');
 
     const decoded = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
@@ -58,7 +49,6 @@ export const clientePost = async (req, res) => {
         })
     }
  
->>>>>>> 58d870c071a8c6ee9c9bb09dc4d6dcaa0bd17536
     const salt = bcryptjs.genSaltSync(10);
     cliente.password = bcryptjs.hashSync(password, salt);
 
@@ -86,14 +76,9 @@ export const getClienteById = async (req,res) => {
 export const clientesPut = async (req, res = response) => {
 
     const { id } = req.params;
-    const {_id, nameClient, address, cellphone, email, job, monthlyIncome, ...resto} = req.body
+    const {_id, password,account_number,DPI,estado, ...resto} = req.body
 
-    if(password) {
-        const salt = bcryptjs.genSaltSync();
-        resto.password = bcryptjs.hashSync(password, salt);
-    }
-
-    await Cliente.findByAndUpdate(id, resto);
+    await Cliente.findByIdAndUpdate(id, resto);
 
     const cliente = await Cliente.findOne({_id: id});
 
