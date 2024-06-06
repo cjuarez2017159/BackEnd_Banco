@@ -25,9 +25,9 @@ class Server{
         this.authPath = '/bank/v1/auth';
         this.servicePath = '/bank/v1/service';
         this.productPath = '/bank/v1/product';
-        this.accountPath = '/bank/v1/account'
-        this.historyPath = '/bank/v1/history'
-        this.favoritePath = '/bank/v1/favorite'
+        this.accountPath = '/bank/v1/account';
+        this.historyPath = '/bank/v1/history';
+        this.favoritePath = '/bank/v1/favorite';
 
         this.conectarDB();
         this.middlewares();

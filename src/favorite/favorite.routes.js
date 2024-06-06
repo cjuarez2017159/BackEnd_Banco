@@ -8,16 +8,14 @@ import {
     favoriteDelete
 } from "./favorite.controller.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
-import { validarJWT } from "../middlewares/validar-jwt.js";
 
 const router = Router();
 
-router.get("/", validarJWT, favoriteGet);
+router.get("/",  favoriteGet);
 
 router.post(
     "/",
     [
-        validarJWT,
         check("account_number", "El número de cuenta es obligatorio").not().isEmpty(),
         check("alias", "El alias es obligatorio").not().isEmpty(),
         check("DPI", "El DPI es obligatorio").not().isEmpty(),
@@ -26,12 +24,12 @@ router.post(
     favoritePost
 );
 
-router.get("/:id", validarJWT, favoriteGetById);
+router.get("/:id",  favoriteGetById);
 
 router.put(
     "/:id",
     [
-        validarJWT,
+        
         check("account_number", "El número de cuenta es obligatorio").not().isEmpty(),
         check("alias", "El alias es obligatorio").not().isEmpty(),
         check("DPI", "El DPI es obligatorio").not().isEmpty(),
@@ -40,6 +38,6 @@ router.put(
     favoritePut
 );
 
-router.delete("/:id", validarJWT, favoriteDelete);
+router.delete("/:id",  favoriteDelete);
 
 export default router;

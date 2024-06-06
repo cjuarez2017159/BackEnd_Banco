@@ -38,24 +38,27 @@ export const favoriteGetById = async (req, res = response) => {
 
 export const favoritePut = async (req, res = response) => {
     const { id } = req.params;
-    const { account_number, alias, DPI } = req.body;
+    const { __id, estado, ...resto } = req.body;
 
     try {
-        const updatedFavorite = await Favorite.findByIdAndUpdate(
-            id,
-            { account_number, alias, DPI },
-            { new: true }
-        );
+        const updatedFavorite = await Favorite.findByIdAndUpdate(id, resto, { new: true });
 
-        if (!updatedFavorite) {
-            return res.status(404).json({ msg: "Favorito no encontrado" });
+        if(!updatedFavorite) {
+            return res.status(404).json({
+                msg: 'favorito no encontrado'
+            });
         }
 
-        return res.status(200).json({ msg: "Favorito actualizado", favorite: updatedFavorite });
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
+        return res.status(200).json({
+            msg: 'Favorito actualizado',
+            favorite: updatedFavorite
+        });
+    }catch (error){
+        return res.status(500).json({
+            error: error.message
+        });
     }
-};
+}
 
 export const favoriteDelete = async (req, res = response) => {
     const { id } = req.params;

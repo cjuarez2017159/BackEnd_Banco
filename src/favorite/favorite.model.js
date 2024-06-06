@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
-const FavoriteSchema = mongoose({
+const FavoriteSchema = mongoose.Schema({
+
     account_number: {
         type: String,
         required: true
@@ -19,4 +20,4 @@ const FavoriteSchema = mongoose({
     }
 });
 
-export default mongoose.model('Favorite', FavoriteSchema)
+export default mongoose.model('Favorite', FavoriteSchema);
