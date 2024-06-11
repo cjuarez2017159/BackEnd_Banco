@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const DepositSchema = mongoose.Schema({
 
     amount: {
-        type: decimal,
+        type: String,
         required: [true, "Amount es obligatorio"]
     },
 
@@ -16,6 +16,11 @@ const DepositSchema = mongoose.Schema({
         type: String,
         required: [true, "el DPI es obligatorio"]
     },  
+
+    time: {
+        type: Date,
+        default: Date.now
+    },
 
     estado: {
         type: Boolean,
