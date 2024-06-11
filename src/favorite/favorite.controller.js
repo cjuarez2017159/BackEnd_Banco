@@ -43,10 +43,15 @@ export const favoriteGetById = async (req, res = response) => {
     const { id } = req.params;
 
     try {
-        const favorite = await Favorite.findById(id);
+        // Buscar el favorito por su ID y verificar que tenga el estado "true"
+        const favorite = await Favorite.findOne({ _id: id, estado: true });
+
+        // Verificar si el favorito existe
         if (!favorite) {
             return res.status(404).json({ msg: "Favorito no encontrado" });
         }
+
+        // Si el favorito tiene el estado "true", devolverlo en la respuesta
         return res.status(200).json({ favorite });
     } catch (error) {
         return res.status(500).json({ error: error.message });
