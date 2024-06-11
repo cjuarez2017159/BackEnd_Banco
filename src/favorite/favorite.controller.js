@@ -1,6 +1,5 @@
 import Favorite from "./favorite.model.js";
 import { response } from "express";
-import jwt from "jsonwebtoken";
 
 export const favoriteGet = async (req, res = response) => {
     try {
@@ -61,22 +60,17 @@ export const favoritePut = async (req, res = response) => {
     }
 }
 
-export const favoriteDelete = async (req, res = response) => {
+export const favoriteDelete = async (req, res) => {
     const { id } = req.params;
-    const token = req.header("x-token")
-
-    const decoded = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
-    const userId = decoded.uid;
-    const isAdmin = await adminModel.findById(use)
 
     try {
-        const updatedFavorite = await Favorite.findByIdAndUpdate(id, { estado: false }, { new: true });
+        const deletedFavorite = await Favorite.findOneAndDelete({ _id: id });
 
-        if (!updatedFavorite) {
-            return res.status(404).json({ msg: "Favorito no encontrado" });
+        if (!deletedFavorite) {
+            return res.status(404).json({ msg: 'Favorito no encontrado' });
         }
 
-        return res.status(200).json({ msg: "Estado del favorito eliminado", favorite: updatedFavorite });
+        return res.status(200).json({ msg: 'Favorito eliminado', favorite: deletedFavorite });
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
