@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const FavoriteSchema = mongoose.Schema({
 
+    accountOwner: {
+        type: String,
+        required: true
+    },
     account_number: {
         type: String,
         required: true
