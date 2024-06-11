@@ -56,9 +56,9 @@ export const revertDeposits = async (req, res) => {
             return res.status(400).json({ message: "Este depósito ya ha sido revertido." });
         }
 
-        const oneMinuteAgo = new Date(Date.now() - 1 * 60 * 1000);
+        const oneMinuteAgo = new Date(Date.now() - 5 * 60 * 1000);
         if (deposit.time < oneMinuteAgo) {
-            return res.status(400).json({ message: "Ya ha pasado más de un minuto desde que se realizó este depósito. No se puede revertir." });
+            return res.status(400).json({ message: "Ya ha pasado más de 5 minutos desde que se realizó este depósito. No se puede revertir." });
         }
 
         const account = await Account.findOne({ accountNumber: deposit.account_number });
