@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { check } from "express-validator";
-import { productGet, productPost, productsPut } from "./product.controller.js";
+import { productGet, productPost, productsPut, productDelete } from "./product.controller.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
 import { validarJWT } from "../middlewares/validar-jwt.js";
 
@@ -27,5 +27,8 @@ router.put("/:id", [
 ],
 productsPut
 );
+
+router.delete("/:id", validarJWT, productDelete);
+
 
 export default router;
