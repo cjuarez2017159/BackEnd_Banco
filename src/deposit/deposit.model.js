@@ -4,17 +4,17 @@ const DepositSchema = mongoose.Schema({
 
     amount: {
         type: String,
-        required: [true, "Amount es obligatorio"]
+        required: [true, "Amount is required"]
     },
 
     account_number: {
         type: String,
-        required: [true, "El número de cuenta del cliente es obligatorio"],
+        required: [true, "the num of the account is requiered"],
     },
     
     DPI: {
         type: String,
-        required: [true, "el DPI es obligatorio"]
+        required: [true, "the DPI is required"]
     },  
 
     time: {

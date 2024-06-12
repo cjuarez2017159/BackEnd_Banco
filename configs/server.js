@@ -14,6 +14,7 @@ import productRoutes from '../src/product/product.routes.js';
 import accountRoutes from '../src/account/account.routes.js';
 import historyRoutes from  '../src/history/history.routes.js';
 import depositRoutes from '../src/deposit/deposit.routes.js';
+import transferRoutes from '../src/transfer/transfer.routes.js';
 
 class Server{
 
@@ -28,6 +29,7 @@ class Server{
         this.accountPath = '/bank/v1/account';
         this.historyPath = '/bank/v1/history';
         this.depositPath = '/bank/v1/deposit';
+        this.transferPath = '/bank/v1/transfer';
 
         this.conectarDB();
         this.middlewares();
@@ -55,6 +57,7 @@ class Server{
         this.app.use(this.accountPath, accountRoutes);
         this.app.use(this.historyPath, historyRoutes);
         this.app.use(this.depositPath, depositRoutes);
+        this.app.use(this.transferPath, transferRoutes);
 
     }
 
