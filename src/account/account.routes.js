@@ -14,7 +14,7 @@ router.get('/',
 router.post('/',
     [
         validarJWT,
-        check("account_number", "The account need one account number").not().isEmpty(),
+        check("accountNumber", "The account need one account number").not().isEmpty(),
         check("amountAccount", "The account need one amount").not().isEmpty(),
         check("DPI", "The account need one DPI").not().isEmpty(),
         check("nameClient", "The account need one name client").not().isEmpty(),

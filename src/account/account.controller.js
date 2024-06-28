@@ -56,7 +56,7 @@ export const getByAccountNumber = async(req, res ) => {
 }
 
 export const accountPost = async (req, res) => {
-    const { account_number, amountAccount, DPI, nameClient } = req.body;
+    const { accountNumber, amountAccount, DPI, nameClient } = req.body;
     const token = req.header("x-token");
     const decoded = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
     const userId = decoded.uid;
@@ -67,7 +67,7 @@ export const accountPost = async (req, res) => {
         return res.status(403).json({ message: "Acceso denegado. Se requieren permisos de administrador." });
     }
 
-    const nuevaCuenta = new Account({ account_number, amountAccount, DPI, nameClient });
+    const nuevaCuenta = new Account({ accountNumber, amountAccount, DPI, nameClient });
     await nuevaCuenta.save();
 
     return res.status(201).json({ message: "Cuenta creada exitosamente", cuenta: nuevaCuenta });

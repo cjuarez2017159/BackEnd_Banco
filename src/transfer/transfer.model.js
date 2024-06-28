@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const TransferSchema = new mongoose.Schema({
     amount: {
-        type: Number,
+        type: String,
         required: true
     },
     sender_account_number: {
@@ -20,6 +20,11 @@ const TransferSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    
+    estado: {
+        type: Boolean,
+        default: true
     }
 });
 
