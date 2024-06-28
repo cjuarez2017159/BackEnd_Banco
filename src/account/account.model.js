@@ -1,11 +1,11 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const AccountSchema = mongoose.Schema({
     amountAccount: {
         type: String,
         required: true
     },
-    accountNumber: {
+    account_number: { 
         type: String,
         required: true
     },

@@ -1,7 +1,7 @@
 import { response, request } from "express";
 import Account from './account.model.js';
+import History from '../history/history.model.js';
 import jwt from "jsonwebtoken"
-import Cliente from '../cliente/cliente.model.js'
 import Admin from '../admin/admin.model.js'
 
 export const accountGet = async (req, res) => {
@@ -62,7 +62,6 @@ export const accountPost = async (req, res) => {
     const userId = decoded.uid;
     const admin = await Admin.findById(userId);
 
-
     if (!admin) {
         return res.status(403).json({ message: "Acceso denegado. Se requieren permisos de administrador." });
     }
@@ -70,7 +69,24 @@ export const accountPost = async (req, res) => {
     const nuevaCuenta = new Account({ account_number, amountAccount, DPI, nameClient });
     await nuevaCuenta.save();
 
-    return res.status(201).json({ message: "Cuenta creada exitosamente", cuenta: nuevaCuenta });
+    const nuevaHistoria = new History({
+        account: [{
+            amountAccount: amountAccount,
+            account_number: account_number 
+        }],
+        service: [{
+            service: "Creación de cuenta"
+        }],
+        product: []
+    });
+
+    await nuevaHistoria.save();
+
+    return res.status(201).json({ 
+        message: "Cuenta creada exitosamente", 
+        cuenta: nuevaCuenta,
+        historia: nuevaHistoria
+    });
 }
 
 export const accountPut = async (req, res) => {
