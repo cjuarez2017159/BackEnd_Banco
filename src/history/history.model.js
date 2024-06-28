@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import account from "../account/account.model.js";
 
 const HistorySchema = mongoose.Schema({
 
