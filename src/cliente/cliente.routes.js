@@ -46,15 +46,3 @@ router.put(
 )
 
 export default router;
-
-
-/*
-nameClient
-DPI
-address
-cellphone
-email
-password
-job
-monthlyIncome
-*/

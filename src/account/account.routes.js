@@ -3,6 +3,7 @@ import { check } from "express-validator";
 import { accountDesactivation, accountGet, accountPost, accountPut, getByAccountNumber } from "./account.controller.js";
 import { validarJWT } from "../middlewares/validar-jwt.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
+import { validarAccountNumberExistente, validarDPIExistente, validarNameClientExistente } from "../middlewares/validaciones.js";
 
 const router = Router()
 
@@ -18,6 +19,9 @@ router.post('/',
         check("amountAccount", "The account need one amount").not().isEmpty(),
         check("DPI", "The account need one DPI").not().isEmpty(),
         check("nameClient", "The account need one name client").not().isEmpty(),
+        validarDPIExistente,
+        validarNameClientExistente,
+        validarAccountNumberExistente,
         validarCampos
     ], accountPost
 )
@@ -39,6 +43,7 @@ router.delete("/:id",
 
 router.get("/searching",
         [
+            check("accountNumber")("Required account number for the searching").isEmpty().not(),
             validarJWT
         ], getByAccountNumber
 )

@@ -4,6 +4,7 @@ import { depositPost, revertDeposits } from "./deposit.controller.js";
 import { validarCampos } from "../middlewares/validar-campos.js"
 import { validarJWT } from "../middlewares/validar-jwt.js";
 import { clienteGet } from "../cliente/cliente.controller.js";
+import { validarLimiteDiarioDeposito } from "../middlewares/validaciones.js";
 
 const router = Router();
 
@@ -16,7 +17,8 @@ router.post(
         check("amount", "El monto es obligatorio").not().isEmpty(),
         check("account_number", "El account number es obligatorio").not().isEmpty(),
         check("DPI", "El DPI debe ser obligatorio").isLength({min: 13}),
-        validarCampos
+        validarCampos,
+        validarLimiteDiarioDeposito
     ],depositPost
 );
 
